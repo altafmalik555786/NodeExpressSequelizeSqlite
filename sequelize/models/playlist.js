@@ -5,7 +5,7 @@ module.exports = sequelize.define('playlist', {
   id: {
     type: DataTypes.INTEGER(11),
     primaryKey: true,
-    allowNull: true,
+    allowNull: false,
     autoIncrement: true,
   },
   name: {
