@@ -1,28 +1,19 @@
 const express = require('express')
 const sequelize = require('./database/sequelize')
-const getPlaylist = require('./api/playlist/get')
-const postPlayList = require('./api/playlist/post')
-const getSinglePlaylist = require('./api/playlist/getSingle')
 const multer = require('multer');
 const forms = multer();
-const playListPath = require('./api/playlist/path')
-const deletePlayList = require('./api/playlist/delete')
-const updatePlayList = require('./api/playlist/update')
+const routes = require('./routes')
+const baseApiPathV1 = require("./api/const")
+const logger = require('morgan');
 
 const app = express()
+const port = 8080
 
+app.use(logger('dev'))
 app.use(express.json()); //Used to parse JSON bodies
 app.use(express.urlencoded()); //Parse URL-encoded bodies
 app.use(forms.array());
-
-const port = 8080
-
-////////////// PlayList API Method ///////////////
-app.get(`${playListPath}`, getPlaylist)
-app.get(`${playListPath}/:id`, getSinglePlaylist)
-app.delete(`${playListPath}/:id`, deletePlayList)
-app.post(`${playListPath}`, postPlayList)
-app.put(`${playListPath}/:id`, updatePlayList)
+app.use(baseApiPathV1.baseApiV1Path, routes)
 
 process.on('unhandledRejection', error => {
   console.log('unhandledRejection', error.message);
