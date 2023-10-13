@@ -1,6 +1,5 @@
 const PlayList = require("../../sequelize/models/playlist")
 
-const basePath = "/playlist"
 
 const postPlayList = async (req, res) => {
     try {
@@ -112,7 +111,6 @@ const deletePlayList = async (req, res) => {
 }
 
 module.exports = {
-    basePath,
     postPlayList,
     getPlayList,
     getSinglePlayList,
