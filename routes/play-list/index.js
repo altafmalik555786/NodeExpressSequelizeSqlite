@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const router = Router();
-const playListApi = require("../api/playlist/index");
-const endPoints = require("./const/path/index");
+const playListApi = require("../../api/playlist/index")
+const endPoints = require("../const/path/index");
 
 router.post(`${endPoints?.playList}`, playListApi.postPlayList);
 router.get(`${endPoints?.playList}`, playListApi.getPlayList);
