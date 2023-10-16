@@ -2,8 +2,8 @@ const express = require('express')
 const sequelize = require('./database/sequelize')
 const multer = require('multer');
 const forms = multer();
-const routes = require('./routes')
-const baseApiPathV1 = require("./api/const")
+const routes = require('./routes/play-list/index')
+const { BaseUrl } = require("./api/const")
 const logger = require('morgan');
 
 const app = express()
@@ -13,7 +13,7 @@ app.use(logger('dev'))
 app.use(express.json()); //Used to parse JSON bodies
 app.use(express.urlencoded()); //Parse URL-encoded bodies
 app.use(forms.array());
-app.use(baseApiPathV1.baseApiV1Path, routes)
+app.use(BaseUrl, routes)
 
 process.on('unhandledRejection', error => {
   console.log('unhandledRejection', error.message);

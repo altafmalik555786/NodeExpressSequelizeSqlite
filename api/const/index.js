@@ -1,5 +1,5 @@
-const baseApiV1Path = "/api/v1/"
+const BaseUrl = "/api/v1/"
 
 module.exports = {
-    baseApiV1Path,
+    BaseUrl,
 }

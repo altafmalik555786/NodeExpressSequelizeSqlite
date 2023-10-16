@@ -24,6 +24,8 @@ const getPlayList = async (req, res) => {
             success: true,
             playlist,
         }
+        console.log("================= endPoints?.playList", req, res)
+
         res.status(200).json(payload)
     } catch (error) {
         console.log('getPlayList catch error',  error)
