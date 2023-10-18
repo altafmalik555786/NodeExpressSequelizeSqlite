@@ -1,4 +1,5 @@
 const PlayList = require("../../sequelize/models/playlist")
+const { handleCatchedError } = require("../const")
 
 const postPlayList = async (req, res) => {
     try {
@@ -18,7 +19,7 @@ const postPlayList = async (req, res) => {
 
 const getPlayList = async (req, res) => {
     try {
-        const playlist = await PlayList?.findAll()
+        const playlist = await PlayList?.findoneAll()
         const payload = {
             success: true,
             data: playlist,
@@ -26,7 +27,7 @@ const getPlayList = async (req, res) => {
         
         res.status(200).json(payload)
     } catch (error) {
-        handleCatchedError({ at: "getPlayList catch error", error })
+        handleCatchedError({  error })
         res.status(400).json(error)
     }
 }
