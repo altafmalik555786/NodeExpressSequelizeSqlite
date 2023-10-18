@@ -2,4 +2,6 @@ const endPoints = {
     playList: "/playlist",
 }
 
-module.exports = endPoints;
+module.exports = {
+    endPoints
+};

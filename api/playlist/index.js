@@ -1,6 +1,5 @@
 const PlayList = require("../../sequelize/models/playlist")
 
-
 const postPlayList = async (req, res) => {
     try {
         const playlist = await PlayList.create({
@@ -8,11 +7,11 @@ const postPlayList = async (req, res) => {
         })
         const response = {
             success: true,
-            playlist,
+            data: playlist,
         }
         res.status(200).send(response)
     } catch (error) {
-        console.log('postPlayList catch error',  error)
+        handleCatchedError({ at: "postPlayList catch error", error })
         res.json(error)
     }
 }
@@ -22,13 +21,12 @@ const getPlayList = async (req, res) => {
         const playlist = await PlayList?.findAll()
         const payload = {
             success: true,
-            playlist,
+            data: playlist,
         }
-        console.log("================= endPoints?.playList", req, res)
-
+        
         res.status(200).json(payload)
     } catch (error) {
-        console.log('getPlayList catch error',  error)
+        handleCatchedError({ at: "getPlayList catch error", error })
         res.status(400).json(error)
     }
 }
@@ -40,7 +38,7 @@ const getSinglePlayList = async (req, res) => {
         if (playlist) {
             const payload = {
                 success: true,
-                playlist,
+                data: playlist,
             }
             res.status(200).json(payload)
         } else {
@@ -51,7 +49,7 @@ const getSinglePlayList = async (req, res) => {
             res.status(400).json(payload)   
         }
     } catch (error) {
-        console.log('getSinglePlayList catch error',  error)
+        handleCatchedError({ at: "getSinglePlayList catch error", error })
         res?.json(error)
     }
 }
@@ -78,7 +76,7 @@ const updatePlayList = async (req, res) => {
             return res.status(400).json(payload);
         }
     } catch (error) {
-        console.log('updatePlayList catch error',  error)
+        handleCatchedError({ at: "updatePlayList", error })
         res.status(400).json(error)
     }
 }
@@ -107,7 +105,7 @@ const deletePlayList = async (req, res) => {
             res.status(400).json(payload)
         }
     } catch (error) {
-        console.log('deletePlayList catch error',  error)
+        handleCatchedError({ at: "deletePlayList", error })
         res.status(400).json(error)
     }
 }
