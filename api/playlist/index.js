@@ -1,28 +1,24 @@
 const PlayList = require("../../sequelize/models/playlist")
 const { MESSAGE_NOT_FOUND, UPDATED_SUCCESSFULLY, DELETED_SUCCESSFULLY, CREATED_SUCCESSFULLY } = require("../../utils/const")
-const { failureResponse, handleCatchedError, successResponse } = require("../../utils/helper")
+const { returnSuccessResponse, returnFailureResponse, returnCatchedError } = require("../../utils/helper")
 
 const postPlayList = async (req, res) => {
     try {
         const playlist = await PlayList.create({
             name: req?.body?.name
         })
-        const response = successResponse({ data: playlist, message: CREATED_SUCCESSFULLY("Playlist") })
-        res.status(200).send(response)
+        returnSuccessResponse({ res, data: playlist, message: CREATED_SUCCESSFULLY("Playlist") })
     } catch (error) {
-        handleCatchedError({ at: "postPlayList", error })
-        res.json(error)
+        returnCatchedError({ res, error, at: "postPlayList" })
     }
 }
 
 const getPlayList = async (req, res) => {
     try {
         const playlist = await PlayList?.findAll()
-        const payload = successResponse({ data: playlist })
-        res.status(200).json(payload)
+        returnSuccessResponse({ res, data: playlist })
     } catch (error) {
-        handleCatchedError({ error, at: "getPlayList" })
-        res.status(400).json(error)
+        returnCatchedError({ res, error, at: "getPlayList" })
     }
 }
 
@@ -31,15 +27,12 @@ const getSinglePlayList = async (req, res) => {
         const { id } = req?.params
         const playlist = await PlayList?.findByPk(id)
         if (playlist) {
-            const payload = successResponse({ data: playlist })
-            res.status(200).json(payload)
+            returnSuccessResponse({ res, data: playlist })
         } else {
-            const payload = failureResponse({ message: MESSAGE_NOT_FOUND })
-            res.status(400).json(payload)
+            returnFailureResponse({ res, message: MESSAGE_NOT_FOUND })
         }
     } catch (error) {
-        handleCatchedError({ at: "getSinglePlayList ", error })
-        res?.json(error)
+        returnCatchedError({ res, error, at: "getSinglePlayList " })
     }
 }
 
@@ -51,15 +44,13 @@ const updatePlayList = async (req, res) => {
             const { name } = req.body;
             record.name = name;
             await record.save();
-            const payload = successResponse({ data: record, message: UPDATED_SUCCESSFULLY("Playlist") })
+            returnSuccessResponse({ res, data: record, message: UPDATED_SUCCESSFULLY("Playlist") })
             res.status(200).json(payload);
         } else {
-            const payload = failureResponse({ message: MESSAGE_NOT_FOUND })
-            return res.status(400).json(payload);
+            returnFailureResponse({ res, message: MESSAGE_NOT_FOUND })
         }
     } catch (error) {
-        handleCatchedError({ at: "updatePlayList", error })
-        res.status(400).json(error)
+        returnCatchedError({ res, error, at: "updatePlayList" })
     }
 }
 
@@ -73,15 +64,12 @@ const deletePlayList = async (req, res) => {
                     id
                 }
             })
-            const payload = successResponse({ data: targetData, message: DELETED_SUCCESSFULLY("Record")})
-            res.status(200).json(payload)
+            returnSuccessResponse({ res, data: targetData, message: DELETED_SUCCESSFULLY("Record") })
         } else {
-            const payload = failureResponse({ message: MESSAGE_NOT_FOUND })
-            res.status(400).json(payload)
+            returnFailureResponse({ res, message: MESSAGE_NOT_FOUND })
         }
     } catch (error) {
-        handleCatchedError({ at: "deletePlayList", error })
-        res.status(400).json(error)
+        returnCatchedError({ res, error, at: "deletePlayList" })
     }
 }
 

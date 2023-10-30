@@ -4,7 +4,7 @@ const multer = require("multer");
 const forms = multer();
 const logger = require("morgan");
 const useCombineRoutes = require("./routes/index");
-const { handleCatchedError } = require("./api/const");
+const { handleCatchedError } = require("./utils/helper");
 
 const app = express();
 const port = 8080;
