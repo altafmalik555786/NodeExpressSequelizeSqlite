@@ -8,8 +8,8 @@ const { BaseUrl } = require("../api/const/index");
 router.get("/", (req, res) => {
   res.send(`
     <h2>Welcome</h2> 
-    <b> We are here to welcome you to our Express, Sequelize Application.
-    We are building a product to act like a boilerplate.</b>
+    <b> I'm here to welcome you to my Express, Sequelize Application.
+    I'm building a product to act like a boilerplate.</b>
     <p>You are now at our root route "/".</p>
  `);
 });
