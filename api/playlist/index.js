@@ -19,7 +19,7 @@ const postPlayList = async (req, res) => {
 
 const getPlayList = async (req, res) => {
     try {
-        const playlist = await PlayList?.findoneAll()
+        const playlist = await PlayList?.findAll()
         const payload = {
             success: true,
             data: playlist,
@@ -27,7 +27,7 @@ const getPlayList = async (req, res) => {
         
         res.status(200).json(payload)
     } catch (error) {
-        handleCatchedError({  error })
+        handleCatchedError({ error, at: "getPlayList" })
         res.status(400).json(error)
     }
 }
