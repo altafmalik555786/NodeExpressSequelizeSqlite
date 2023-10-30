@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 
-const routes = require("./play-list");
+const routesPlayList = require("./play-list");
 const { BaseUrl } = require("../api/const/index");
 
 ////// Default Path start_poinnt //////
@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
 ////// Default Path end_point ///////
 
 const useCombineRoutes = (app) => {
-  app.use(BaseUrl, routes);
+  app.use(BaseUrl, routesPlayList);
   app.use(router);
 };
 

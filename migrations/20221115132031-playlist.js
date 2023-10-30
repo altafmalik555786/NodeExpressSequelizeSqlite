@@ -2,12 +2,12 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await queryInterface.createTable('playlist', {
       id: {
         type: Sequelize.DataTypes.INTEGER(11),
         primaryKey: true,
-        allowNull:true,
+        allowNull: true,
         autoIncrement: true,
       },
       name: {
@@ -26,7 +26,7 @@ module.exports = {
     });
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     /**
      * Add reverting commands here.
      *
